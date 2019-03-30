@@ -7,12 +7,14 @@ Classes
 import pygame
 from pygame.locals import * 
 from constates import *
+import random 
 
 class Niveau:
 	"""Classe permettant de créer un niveau"""
 	def __init__(self, fichier):
 		self.fichier = fichier
 		self.structure = 0
+		self.position_elem = []
 	
 	
 	def generer(self):
@@ -34,15 +36,22 @@ class Niveau:
 				structure_niveau.append(ligne_niveau)
 			#On sauvegarde cette structure
 			self.structure = structure_niveau
-    
+
+
 	
+
+
 	def afficher(self, fenetre):
 		"""Méthode permettant d'afficher le niveau en fonction 
 		de la liste de structure renvoyée par generer()"""
+		
+		
+		
 		#Chargement des images (seule celle d'arrivée contient de la transparence)
 		mur = pygame.image.load(structures_mur).convert_alpha()
 		depart = pygame.image.load(start).convert_alpha()
 		arrivee = pygame.image.load(arrival).convert_alpha()
+		
 		
 		#On parcourt la liste du niveau
 		num_ligne = 0
@@ -59,20 +68,22 @@ class Niveau:
 					fenetre.blit(depart, (x,y))
 				elif sprite == 'a':		   #a = Arrivée
 					fenetre.blit(arrivee, (x,y))
+				elif sprite == 'p':
+					self.position_elem += (x, y)
 				num_case += 1
 			num_ligne += 1
-			
-			
-			
-			
+		
+		
+    
+   
 class Perso:
 	"""Classe permettant de créer un personnage"""
-	def __init__(self, droite, gauche, haut, bas, niveau):
+	def __init__(self, image, niveau):
 		#Sprites du personnage
-		self.droite = pygame.image.load(droite).convert_alpha()
-		self.gauche = pygame.image.load(gauche).convert_alpha()
-		self.haut = pygame.image.load(haut).convert_alpha()
-		self.bas = pygame.image.load(bas).convert_alpha()
+		self.droite = pygame.image.load(image).convert_alpha()
+		self.gauche = pygame.image.load(image).convert_alpha()
+		self.haut = pygame.image.load(image).convert_alpha()
+		self.bas = pygame.image.load(image).convert_alpha()
 		#Position du personnage en cases et en pixels
 		self.case_x = 0
 		self.case_y = 0
