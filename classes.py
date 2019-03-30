@@ -139,4 +139,10 @@ class Perso:
 
 	
 	
-	
+def affichage(fenetre, image, tmp=2000, position=(70, 70)):
+	"""
+	Fonction qui affiche en premier plan des images passer en argument
+	"""
+	fenetre.blit(image, position)
+	pygame.display.flip()
+	pygame.time.wait(tmp)	

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# conding: utf8
+#conding:utf8
 
 """ 
 Jeu : Aidez MacGyver à s'échapper !
@@ -37,6 +37,9 @@ item_trouver = pygame.image.load(bravo).convert_alpha()
 item_trouver.set_colorkey(BLANC)
 libre = pygame.image.load(libre).convert()
 non_libre = pygame.image.load(non_libre).convert()
+ob_ether = pygame.image.load(ob_ether).convert()
+ob_seringue = pygame.image.load(ob_seringue).convert()
+ob_tube = pygame.image.load(ob_tube).convert()
 
 
 #Creation du labyrinthe avec affichage
@@ -99,35 +102,39 @@ while not game_over:
     #Logique de l'affichage des items
     if position_ether != (mac.x, mac.y) and ether_trouver == False:
         fenetre.blit(element_ether, tuple(position_ether))
-    else: ether_trouver = True
+    else:
+        if ether_trouver == False:
+            affichage(fenetre, ob_ether) 
+            ether_trouver = True
 
     if position_tube != (mac.x, mac.y) and tube_trouver == False:
         fenetre.blit(element_tube, tuple(position_tube))    
-    else: tube_trouver = True
+    else:
+        if tube_trouver == False:
+            affichage(fenetre, ob_tube) 
+            tube_trouver = True
 
     if position_aiguille != (mac.x, mac.y) and aiguille_trouver == False:
         fenetre.blit(element_aiguille, tuple(position_aiguille))
-    else: aiguille_trouver = True 
-    
+    else:
+        if aiguille_trouver == False:
+            
+            affichage(fenetre, ob_seringue) 
+            aiguille_trouver = True
     # Verifications si tous les items on ete trouve 
     if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
-       fenetre.blit(item_trouver, (70, 70))
-       pygame.display.flip()
-       pygame.time.delay(3000)
+       affichage(fenetre, item_trouver)
        item_3 = True 
+    
     #Rencontre avec le Gardien
     if mac.x == 360 and mac.y == 420:
         if item_3 == True:
             #fenetre.blit(discution)
-            fenetre.blit(libre, (70, 70))
-            pygame.display.flip()
-            pygame.time.wait(2000)
+            affichage(fenetre, libre)
             
         else:
             #fenetre de vous avez perdu
-            fenetre.blit(non_libre, (70, 70))
-            pygame.display.flip()
-            pygame.time.wait(2000)
+            affichage(fenetre, non_libre)
 
 
     if niv.structure[mac.case_y][mac.case_x] == 'a':

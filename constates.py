@@ -5,7 +5,7 @@ nombre_sprite_cote = 15
 taille_sprite = 30
 cote_fenetre = nombre_sprite_cote * taille_sprite
 
-fenetre_resolution = (450, 450)
+fenetre_resolution = (cote_fenetre, cote_fenetre)
 fenetre_icon = "images/MacGyver.png"
 fenetre_titre = "Aidez MacGyver à s'échapper !"
 fenetre_fond = "images/fond.png"
@@ -32,6 +32,9 @@ start = "images/start1.png"
 bravo = "images/Injection fabriquee.png"
 libre = "images/libre.png"
 non_libre = "images/non_libre.png"
+ob_seringue = "images/Objet_trouve_seringue.png"
+ob_tube = "images/Objet_trouve_tube.png"
+ob_ether = "images/Objet_trouve_ether.png"
 
 #Liste des items
 item_trouver = "images/item_trouver.png"
