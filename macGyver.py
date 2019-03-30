@@ -33,8 +33,10 @@ sering = pygame.image.load(seringue).convert()
 element_ether = pygame.image.load(ether).convert_alpha()
 element_tube = pygame.image.load(tube_plastique).convert_alpha()
 element_aiguille = pygame.image.load(aiguille).convert_alpha()
-item_trouver = pygame.image.load(item_trouver).convert_alpha()
+item_trouver = pygame.image.load(bravo).convert_alpha()
 item_trouver.set_colorkey(BLANC)
+libre = pygame.image.load(libre).convert()
+non_libre = pygame.image.load(non_libre).convert()
 
 
 #Creation du labyrinthe avec affichage
@@ -51,6 +53,7 @@ position_ether,  position_tube, position_aiguille = random.sample(liste_postion,
 ether_trouver = False
 tube_trouver = False
 aiguille_trouver = False
+item_3 = False
 
 
 #Creation du personnage McGyver
@@ -87,6 +90,7 @@ while not game_over:
                 mac.deplacer('haut')
             elif event.key == pygame.K_DOWN:
                 mac.deplacer('bas')
+            
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=   
     #Affichage (raffrichissement)
     fenetre.blit(fond, (0, 0))
@@ -106,11 +110,28 @@ while not game_over:
     else: aiguille_trouver = True 
     
     # Verifications si tous les items on ete trouve 
-    if tube_trouver == True and ether_trouver == True and aiguille_trouver == True:
-       fenetre.blit(item_trouver, (150, 150))
+    if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
+       fenetre.blit(item_trouver, (70, 70))
+       pygame.display.flip()
+       pygame.time.delay(3000)
+       item_3 = True 
+    #Rencontre avec le Gardien
+    if mac.x == 360 and mac.y == 420:
+        if item_3 == True:
+            #fenetre.blit(discution)
+            fenetre.blit(libre, (70, 70))
+            pygame.display.flip()
+            pygame.time.wait(2000)
+            
+        else:
+            #fenetre de vous avez perdu
+            fenetre.blit(non_libre, (70, 70))
+            pygame.display.flip()
+            pygame.time.wait(2000)
 
 
-    
+    if niv.structure[mac.case_y][mac.case_x] == 'a':
+        game_over = True 
     fenetre.blit(mac.gauche, (mac.x, mac.y))
     #Condition de collision
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

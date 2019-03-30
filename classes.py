@@ -51,6 +51,7 @@ class Niveau:
 		mur = pygame.image.load(structures_mur).convert_alpha()
 		depart = pygame.image.load(start).convert_alpha()
 		arrivee = pygame.image.load(arrival).convert_alpha()
+		gardien = pygame.image.load(Gardien).convert_alpha()
 		
 		
 		#On parcourt la liste du niveau
@@ -63,12 +64,13 @@ class Niveau:
 				x = num_case * taille_sprite
 				y = num_ligne * taille_sprite
 				if sprite == 'm':		   #m = Mur
-					fenetre.blit(mur, (x,y))
+					fenetre.blit(mur, (x, y))
 				elif sprite == 'd':		   #d = Départ
-					fenetre.blit(depart, (x,y))
+					fenetre.blit(depart, (x, y))
 				elif sprite == 'a':		   #a = Arrivée
-					fenetre.blit(arrivee, (x,y))
-				elif sprite == 'p':
+					fenetre.blit(arrivee, (x, y))
+					fenetre.blit(gardien, (x-taille_sprite, y))
+				elif sprite == 'p':		   #p = position pour items 
 					self.position_elem += (x, y)
 				num_case += 1
 			num_ligne += 1

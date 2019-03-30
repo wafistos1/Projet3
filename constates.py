@@ -29,6 +29,9 @@ structures_mur = "images/structures_mur1.png"
 structures_vide = "images/structures_vide.xcf"
 arrival = "images/arrival.png"
 start = "images/start1.png"
+bravo = "images/Injection fabriquee.png"
+libre = "images/libre.png"
+non_libre = "images/non_libre.png"
 
 #Liste des items
 item_trouver = "images/item_trouver.png"
