@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#conding:utf8
+# -*- coding: UTf8 -*-
 
 """ 
 Jeu : Aidez MacGyver à s'échapper !
@@ -20,6 +20,9 @@ pygame.init()
 
 #Couleur
 BLANC = (255, 255, 255)
+
+#font
+ubuntu_my_font = pygame.font.SysFont("ubuntu", 40)
 
 #Diffirentes etapes de la creations du jeu
 pygame.display.set_caption(fenetre_titre)
@@ -57,6 +60,7 @@ ether_trouver = False
 tube_trouver = False
 aiguille_trouver = False
 item_3 = False
+meet_gardien_macGver = False
 
 
 #Creation du personnage McGyver
@@ -66,6 +70,9 @@ mac = Perso(perso_MacGyver, niv)
 fenetre.blit(element_ether, tuple(position_ether))
 fenetre.blit(element_tube, tuple(position_tube))
 fenetre.blit(element_aiguille, tuple(position_aiguille))
+
+#Deplacement en laisant la touche enfoncee 
+pygame.key.set_repeat(400, 30)
 
 pygame.display.flip()
 game_over = False 
@@ -119,7 +126,7 @@ while not game_over:
     else:
         if aiguille_trouver == False:
             
-            affichage(fenetre, ob_seringue) 
+            animation(fenetre, "Seringue touvee", ubuntu_my_font, )
             aiguille_trouver = True
     # Verifications si tous les items on ete trouve 
     if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
@@ -127,14 +134,17 @@ while not game_over:
        item_3 = True 
     
     #Rencontre avec le Gardien
-    if mac.x == 360 and mac.y == 420:
+    if mac.x == 360 and mac.y == 420 and meet_gardien_macGver == False:
+        meet_gardien_macGver = True
         if item_3 == True:
             #fenetre.blit(discution)
             affichage(fenetre, libre)
             
+            
         else:
             #fenetre de vous avez perdu
             affichage(fenetre, non_libre)
+            
 
 
     if niv.structure[mac.case_y][mac.case_x] == 'a':

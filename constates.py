@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+# -*- coding: UTf8 -*-
+
+
 """ 
 Fichier ou on stoke les constantes 
 """
@@ -26,7 +30,6 @@ tile_crusader = "images/tile-crusader-logo.png"
 personnages = "images/personnages.png"
 seringue = "images/seringue1.png"
 structures_mur = "images/structures_mur1.png"
-structures_vide = "images/structures_vide.xcf"
 arrival = "images/arrival.png"
 start = "images/start1.png"
 bravo = "images/Injection fabriquee.png"
@@ -38,3 +41,4 @@ ob_ether = "images/Objet_trouve_ether.png"
 
 #Liste des items
 item_trouver = "images/item_trouver.png"
+

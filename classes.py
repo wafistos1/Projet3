@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: UTf8 -*-
+
 """
 Classes
 
@@ -145,4 +148,19 @@ def affichage(fenetre, image, tmp=2000, position=(70, 70)):
 	"""
 	fenetre.blit(image, position)
 	pygame.display.flip()
-	pygame.time.wait(tmp)	
+	pygame.time.delay(tmp)
+
+
+def animation(fenetre, texte, my_font, text_color=(0, 0, 255), backgroud_color=(255, 255, 255)):
+	"""Fonction animated text
+	"""
+	lettre = ""
+	for lettre1 in texte:
+		pygame.time.Clock().tick(4)
+		
+		lettre += lettre1
+		leto = my_font.render(lettre, False, text_color, backgroud_color)
+		fenetre.blit(leto, (100, 100))
+		pygame.display.flip()
+	pygame.time.delay(1000)
+		
