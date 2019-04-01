@@ -55,6 +55,7 @@ class Niveau:
 		depart = pygame.image.load(start).convert_alpha()
 		arrivee = pygame.image.load(arrival).convert_alpha()
 		gardien = pygame.image.load(Gardien).convert_alpha()
+		my_decorations4 = pygame.image.load(decorations4).convert()
 		
 		
 		#On parcourt la liste du niveau
@@ -68,6 +69,8 @@ class Niveau:
 				y = num_ligne * taille_sprite
 				if sprite == 'm':		   #m = Mur
 					fenetre.blit(mur, (x, y))
+				if sprite == 'x':
+					fenetre.blit(my_decorations4, (x, y))
 				elif sprite == 'd':		   #d = Départ
 					fenetre.blit(depart, (x, y))
 				elif sprite == 'a':		   #a = Arrivée
@@ -108,7 +111,7 @@ class Perso:
 			#Pour ne pas dépasser l'écran
 			if self.case_x < (nombre_sprite_cote - 1):
 				#On vérifie que la case de destination n'est pas un mur
-				if self.niveau.structure[self.case_y][self.case_x+1] != 'm':
+				if self.niveau.structure[self.case_y][self.case_x+1] != 'm' and self.niveau.structure[self.case_y][self.case_x+1] != 'x':
 					#Déplacement d'une case
 					self.case_x += 1
 					#Calcul de la position "réelle" en pixel
@@ -119,7 +122,7 @@ class Perso:
 		#Déplacement vers la gauche
 		if direction == 'gauche':
 			if self.case_x > 0:
-				if self.niveau.structure[self.case_y][self.case_x-1] != 'm':
+				if self.niveau.structure[self.case_y][self.case_x-1] != 'm' and self.niveau.structure[self.case_y][self.case_x-1] != 'x':
 					self.case_x -= 1
 					self.x = self.case_x * taille_sprite
 			self.direction = self.gauche
@@ -127,7 +130,7 @@ class Perso:
 		#Déplacement vers le haut
 		if direction == 'haut':
 			if self.case_y > 0:
-				if self.niveau.structure[self.case_y-1][self.case_x] != 'm':
+				if self.niveau.structure[self.case_y-1][self.case_x] != 'm' and self.niveau.structure[self.case_y-1][self.case_x] != 'x':
 					self.case_y -= 1
 					self.y = self.case_y * taille_sprite
 			self.direction = self.haut
@@ -135,7 +138,7 @@ class Perso:
 		#Déplacement vers le bas
 		if direction == 'bas':
 			if self.case_y < (nombre_sprite_cote - 1):
-				if self.niveau.structure[self.case_y+1][self.case_x] != 'm':
+				if self.niveau.structure[self.case_y+1][self.case_x] != 'm' and self.niveau.structure[self.case_y+1][self.case_x] != 'x':
 					self.case_y += 1
 					self.y = self.case_y * taille_sprite
 			self.direction = self.bas
@@ -151,16 +154,17 @@ def affichage(fenetre, image, tmp=2000, position=(70, 70)):
 	pygame.time.delay(tmp)
 
 
-def animation(fenetre, texte, my_font, text_color=(0, 0, 255), backgroud_color=(255, 255, 255)):
+def animation(fenetre, texte, my_font, text_color=(0, 7, 255), backgroud_color=(255, 255, 255)):
 	"""Fonction animated text
 	"""
 	lettre = ""
 	for lettre1 in texte:
-		pygame.time.Clock().tick(4)
+		pygame.time.Clock().tick(8)
 		
 		lettre += lettre1
-		leto = my_font.render(lettre, False, text_color, backgroud_color)
-		fenetre.blit(leto, (100, 100))
+		my_surface_font = my_font.render(lettre, False, text_color, backgroud_color)
+		fenetre.blit(my_surface_font, (100, 100))
 		pygame.display.flip()
+		#ajouter une surface pour netoyer l'ecran ....
 	pygame.time.delay(1000)
 		

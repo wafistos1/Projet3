@@ -24,10 +24,14 @@ BLANC = (255, 255, 255)
 #font
 ubuntu_my_font = pygame.font.SysFont("ubuntu", 40)
 
+#Creation list of object
+list_object = ["Ether", "Tube", "Aiguille"]
+
 #Diffirentes etapes de la creations du jeu
 pygame.display.set_caption(fenetre_titre)
 fenetre = pygame.display.set_mode(fenetre_resolution)
-fond = pygame.image.load(fenetre_fond)
+fond = pygame.image.load(menu)
+fond_noir = pygame.image.load(fond_noir)
 icone = pygame.image.load(fenetre_icon).convert()
 pygame.display.set_icon(icone)
 
@@ -45,15 +49,9 @@ ob_seringue = pygame.image.load(ob_seringue).convert()
 ob_tube = pygame.image.load(ob_tube).convert()
 
 
-#Creation du labyrinthe avec affichage
-niv = Niveau("niveau.txt")
-niv.generer()
-niv.afficher(fenetre)
 
-#Recuperation d'une liste pour les positions des items
-i = iter(niv.position_elem)
-liste_postion = list(zip_longest(i, i))
-position_ether,  position_tube, position_aiguille = random.sample(liste_postion, 3)
+
+
 
 #Declarations des items
 ether_trouver = False
@@ -63,93 +61,146 @@ item_3 = False
 meet_gardien_macGver = False
 
 
-#Creation du personnage McGyver
-mac = Perso(perso_MacGyver, niv)
-
-#Blit les items sur le labyrinthe
-fenetre.blit(element_ether, tuple(position_ether))
-fenetre.blit(element_tube, tuple(position_tube))
-fenetre.blit(element_aiguille, tuple(position_aiguille))
 
 #Deplacement en laisant la touche enfoncee 
 pygame.key.set_repeat(400, 30)
 
-pygame.display.flip()
-game_over = False 
+
+#Recuperation d'une liste pour les positions des items
+niv = Niveau("niveau.txt")
+niv.generer()
+niv.afficher(fenetre)
+i = iter(niv.position_elem)
+liste_postion = list(zip_longest(i, i))
+
+
+# Condition for menu and game 
+menu = True
+game_over = False
+continu_game = True  
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 """
 Boucle principale 
 """
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-while not game_over:
-    pygame.time.Clock().tick(30)# Framerate 30
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game_over = True
-        
-        #Control du personnage
-        elif event.type == KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                game_over = True
-            elif event.key == pygame.K_RIGHT:
-                mac.deplacer('droite')
-            elif event.key == pygame.K_LEFT:
-                mac.deplacer('gauche')
-            elif event.key == pygame.K_UP:
-                mac.deplacer('haut')
-            elif event.key == pygame.K_DOWN:
-                mac.deplacer('bas')
-            
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=   
-    #Affichage (raffrichissement)
-    fenetre.blit(fond, (0, 0))
-    niv.afficher(fenetre)
-    
-    #Logique de l'affichage des items
-    if position_ether != (mac.x, mac.y) and ether_trouver == False:
-        fenetre.blit(element_ether, tuple(position_ether))
-    else:
-        if ether_trouver == False:
-            affichage(fenetre, ob_ether) 
-            ether_trouver = True
+ 
+while  menu:
 
-    if position_tube != (mac.x, mac.y) and tube_trouver == False:
-        fenetre.blit(element_tube, tuple(position_tube))    
-    else:
-        if tube_trouver == False:
-            affichage(fenetre, ob_tube) 
-            tube_trouver = True
+#Creation du labyrinthe avec affichage
 
-    if position_aiguille != (mac.x, mac.y) and aiguille_trouver == False:
-        fenetre.blit(element_aiguille, tuple(position_aiguille))
-    else:
-        if aiguille_trouver == False:
-            
-            animation(fenetre, "Seringue touvee", ubuntu_my_font, )
-            aiguille_trouver = True
-    # Verifications si tous les items on ete trouve 
-    if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
-       affichage(fenetre, item_trouver)
-       item_3 = True 
-    
-    #Rencontre avec le Gardien
-    if mac.x == 360 and mac.y == 420 and meet_gardien_macGver == False:
-        meet_gardien_macGver = True
-        if item_3 == True:
-            #fenetre.blit(discution)
-            affichage(fenetre, libre)
-            
-            
-        else:
-            #fenetre de vous avez perdu
-            affichage(fenetre, non_libre)
-            
-
-
-    if niv.structure[mac.case_y][mac.case_x] == 'a':
-        game_over = True 
-    fenetre.blit(mac.gauche, (mac.x, mac.y))
-    #Condition de collision
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     pygame.display.flip()
+    
+
+    
+    position_ether,  position_tube, position_aiguille = random.sample(liste_postion, 3)
+
+    #Creation du personnage McGyver
+    mac = Perso(perso_MacGyver, niv)
+
+    #Blit les items sur le labyrinthe
+    fenetre.blit(element_ether, tuple(position_ether))
+    fenetre.blit(element_tube, tuple(position_tube))
+    fenetre.blit(element_aiguille, tuple(position_aiguille))
+    game_over = False#condition pour une nouvelle partie 
+
+
+
+    while continu_game:
+        pygame.time.Clock().tick(10)
+        fenetre.blit(fond, (50, 50))
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    menu = False 
+                    continu_game = False
+                    game_over = True
+                    
+                elif event.key == pygame.K_c:
+                    continu_game = False
+                    
+    
+     
+    #Boucle principale du jeu 
+    while not game_over:
+        pygame.time.Clock().tick(30)# Framerate 30
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                menu = False
+                continu_game = False
+                game_over = True
+            
+            #Control du personnage
+            elif event.type == KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_over = True
+                elif event.key == pygame.K_RIGHT:
+                    mac.deplacer('droite')
+                elif event.key == pygame.K_LEFT:
+                    mac.deplacer('gauche')
+                elif event.key == pygame.K_UP:
+                    mac.deplacer('haut')
+                elif event.key == pygame.K_DOWN:
+                    mac.deplacer('bas')
+                
+    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=   
+        #Affichage (raffrichissement)
+        fenetre.blit(fond_noir, (0, 0))
+        niv.afficher(fenetre)
+        
+        #Logique de l'affichage des items
+        if position_ether != (mac.x, mac.y) and ether_trouver == False:
+            fenetre.blit(element_ether, tuple(position_ether))
+        else:
+            if ether_trouver == False:
+                affichage(fenetre, ob_ether)
+                list_object.remove("Ether") 
+                ether_trouver = True
+
+        if position_tube != (mac.x, mac.y) and tube_trouver == False:
+            fenetre.blit(element_tube, tuple(position_tube))    
+        else:
+            if tube_trouver == False:
+                animation(fenetre, "Tube trouvée", ubuntu_my_font, )
+                list_object.remove("Tube")
+                animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
+                tube_trouver = True
+
+        if position_aiguille != (mac.x, mac.y) and aiguille_trouver == False:
+            fenetre.blit(element_aiguille, tuple(position_aiguille))
+        else:
+            if aiguille_trouver == False:
+                
+                animation(fenetre, f"Aiguille trouvée", ubuntu_my_font, )
+                list_object.remove("Aiguille")
+                animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
+                aiguille_trouver = True
+        # Verifications si tous les items on ete trouve 
+        if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
+            affichage(fenetre, item_trouver)
+            item_3 = True 
+        
+        #Rencontre avec le Gardien
+        if mac.x == 360 and mac.y == 420 and meet_gardien_macGver == False:
+            meet_gardien_macGver = True
+            if item_3 == True:
+                #fenetre.blit(discution)
+                affichage(fenetre, libre)
+                
+                
+            else:
+                #fenetre de vous avez perdu
+                affichage(fenetre, non_libre)
+                
+
+
+        if niv.structure[mac.case_y][mac.case_x] == 'a':
+            game_over = True
+            #menu = False
+            
+        fenetre.blit(mac.gauche, (mac.x, mac.y))
+        #Condition de collision
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        pygame.display.flip()
