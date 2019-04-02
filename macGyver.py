@@ -69,9 +69,7 @@ pygame.key.set_repeat(400, 30)
 #Recuperation d'une liste pour les positions des items
 niv = Niveau("niveau.txt")
 niv.generer()
-niv.afficher(fenetre)
-i = iter(niv.position_elem)
-liste_postion = list(zip_longest(i, i))
+
 
 
 # Condition for menu and game 
@@ -87,21 +85,26 @@ Boucle principale
 while  menu:
 
 #Creation du labyrinthe avec affichage
-
+    
+    niv.afficher(fenetre)
+    mac = Perso(perso_MacGyver, niv)
     pygame.display.flip()
     
 
-    
-    position_ether,  position_tube, position_aiguille = random.sample(liste_postion, 3)
+    print(niv.position_elem)
+    position_ether,  position_tube, position_aiguille = random.sample(niv.position_elem, 3)
+    print(position_aiguille, position_ether, position_tube)
 
     #Creation du personnage McGyver
-    mac = Perso(perso_MacGyver, niv)
+    
 
     #Blit les items sur le labyrinthe
     fenetre.blit(element_ether, tuple(position_ether))
     fenetre.blit(element_tube, tuple(position_tube))
     fenetre.blit(element_aiguille, tuple(position_aiguille))
+    pygame.display.flip()
     game_over = False#condition pour une nouvelle partie 
+    continu_game = True 
 
 
 
@@ -198,9 +201,10 @@ while  menu:
 
         if niv.structure[mac.case_y][mac.case_x] == 'a':
             game_over = True
+            niv.position_elem = [] #Initialisation the list positions of Objects at 0   
             #menu = False
             
-        fenetre.blit(mac.gauche, (mac.x, mac.y))
+        fenetre.blit(mac.personnage, (mac.x, mac.y))
         #Condition de collision
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         pygame.display.flip()

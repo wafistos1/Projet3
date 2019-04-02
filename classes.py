@@ -16,7 +16,7 @@ class Niveau:
 	"""Classe permettant de créer un niveau"""
 	def __init__(self, fichier):
 		self.fichier = fichier
-		self.structure = 0
+		self.structure = []
 		self.position_elem = []
 	
 	
@@ -25,7 +25,7 @@ class Niveau:
 		On crée une liste générale, contenant une liste par ligne à afficher"""	
 		#On ouvre le fichier
 		with open(self.fichier, "r") as fichier:
-			structure_niveau = []
+			
 			#On parcourt les lignes du fichier
 			for ligne in fichier:
 				ligne_niveau = []
@@ -36,9 +36,9 @@ class Niveau:
 						#On ajoute le sprite à la liste de la ligne
 						ligne_niveau.append(sprite)
 				#On ajoute la ligne à la liste du niveau
-				structure_niveau.append(ligne_niveau)
+				self.structure.append(ligne_niveau)
 			#On sauvegarde cette structure
-			self.structure = structure_niveau
+			
 
 
 	
@@ -69,7 +69,7 @@ class Niveau:
 				y = num_ligne * taille_sprite
 				if sprite == 'm':		   #m = Mur
 					fenetre.blit(mur, (x, y))
-				if sprite == 'x':
+				elif sprite == 'x':
 					fenetre.blit(my_decorations4, (x, y))
 				elif sprite == 'd':		   #d = Départ
 					fenetre.blit(depart, (x, y))
@@ -77,7 +77,8 @@ class Niveau:
 					fenetre.blit(arrivee, (x, y))
 					fenetre.blit(gardien, (x-taille_sprite, y))
 				elif sprite == 'p':		   #p = position pour items 
-					self.position_elem += (x, y)
+					self.position_elem.append((x, y))
+					
 				num_case += 1
 			num_ligne += 1
 		
@@ -88,17 +89,17 @@ class Perso:
 	"""Classe permettant de créer un personnage"""
 	def __init__(self, image, niveau):
 		#Sprites du personnage
-		self.droite = pygame.image.load(image).convert_alpha()
-		self.gauche = pygame.image.load(image).convert_alpha()
-		self.haut = pygame.image.load(image).convert_alpha()
-		self.bas = pygame.image.load(image).convert_alpha()
+		#supprime 
+		self.personnage = pygame.image.load(image).convert_alpha()
+		
 		#Position du personnage en cases et en pixels
 		self.case_x = 0
 		self.case_y = 0
 		self.x = 0
 		self.y = 0
 		#Direction par défaut
-		self.direction = self.droite
+		#supprime 
+		self.direction = self.personnage
 		#Niveau dans lequel le personnage se trouve 
 		self.niveau = niveau
 	
@@ -106,7 +107,7 @@ class Perso:
 	def deplacer(self, direction):
 		"""Methode permettant de déplacer le personnage"""
 		
-		#Déplacement vers la droite
+		#Déplacement vers la personnage
 		if direction == 'droite':
 			#Pour ne pas dépasser l'écran
 			if self.case_x < (nombre_sprite_cote - 1):
@@ -116,8 +117,9 @@ class Perso:
 					self.case_x += 1
 					#Calcul de la position "réelle" en pixel
 					self.x = self.case_x * taille_sprite
+			self.direction = self.personnage
 			#Image dans la bonne direction
-			self.direction = self.droite
+			
 		
 		#Déplacement vers la gauche
 		if direction == 'gauche':
@@ -125,7 +127,7 @@ class Perso:
 				if self.niveau.structure[self.case_y][self.case_x-1] != 'm' and self.niveau.structure[self.case_y][self.case_x-1] != 'x':
 					self.case_x -= 1
 					self.x = self.case_x * taille_sprite
-			self.direction = self.gauche
+			self.direction = self.personnage
 		
 		#Déplacement vers le haut
 		if direction == 'haut':
@@ -133,7 +135,7 @@ class Perso:
 				if self.niveau.structure[self.case_y-1][self.case_x] != 'm' and self.niveau.structure[self.case_y-1][self.case_x] != 'x':
 					self.case_y -= 1
 					self.y = self.case_y * taille_sprite
-			self.direction = self.haut
+			self.direction = self.personnage
 		
 		#Déplacement vers le bas
 		if direction == 'bas':
@@ -141,7 +143,7 @@ class Perso:
 				if self.niveau.structure[self.case_y+1][self.case_x] != 'm' and self.niveau.structure[self.case_y+1][self.case_x] != 'x':
 					self.case_y += 1
 					self.y = self.case_y * taille_sprite
-			self.direction = self.bas
+			self.direction = self.personnage
 
 	
 	
