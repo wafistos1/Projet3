@@ -168,17 +168,20 @@ while  menu:
             fenetre.blit(element_ether, tuple(position_ether))
         else:
             if ether_trouver == False:
-                affichage(fenetre, ob_ether)
-                list_object.remove("Ether") 
+                animation(fenetre, "Ether find", ubuntu_my_font, )
+                list_object.remove("Ether")
+                if len(list_object) != 0:
+                    animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
                 ether_trouver = True
 
         if position_tube != (mac.x, mac.y) and tube_trouver == False:
             fenetre.blit(element_tube, tuple(position_tube))    
         else:
             if tube_trouver == False:
-                animation(fenetre, "Tube trouvée", ubuntu_my_font, )
+                animation(fenetre, "Tube find", ubuntu_my_font, )
                 list_object.remove("Tube")
-                animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
+                if len(list_object) != 0:
+                    animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
                 tube_trouver = True
 
         if position_aiguille != (mac.x, mac.y) and aiguille_trouver == False:
@@ -186,9 +189,10 @@ while  menu:
         else:
             if aiguille_trouver == False:
                 
-                animation(fenetre, f"Aiguille trouvée", ubuntu_my_font, )
+                animation(fenetre, f"Aiguille find", ubuntu_my_font, )
                 list_object.remove("Aiguille")
-                animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
+                if len(list_object) != 0:
+                    animation(fenetre, f"Il reste {len(list_object)} Objets !!", ubuntu_my_font)
                 aiguille_trouver = True
         # Verifications si tous les items on ete trouve 
         if tube_trouver == True and ether_trouver == True and aiguille_trouver == True and item_3 == False:
