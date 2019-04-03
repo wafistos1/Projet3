@@ -13,6 +13,7 @@ import pygame.locals
 import random
 from  classes import *
 from  constates import *
+from perso import *
 from itertools import zip_longest 
 
 #Initialisation du jeu
@@ -24,29 +25,28 @@ BLANC = (255, 255, 255)
 #font
 ubuntu_my_font = pygame.font.SysFont("ubuntu", 40)
 
-#Creation list of object
-list_object = ["Ether", "Tube", "Aiguille"]
+
 
 #Diffirentes etapes de la creations du jeu
-pygame.display.set_caption(fenetre_titre)
-fenetre = pygame.display.set_mode(fenetre_resolution)
-fond = pygame.image.load(menu)
-fond_noir = pygame.image.load(fond_noir)
-icone = pygame.image.load(fenetre_icon).convert()
+pygame.display.set_caption(FENETRE_TITRE)
+fenetre = pygame.display.set_mode(FENETRE_RESOLUTION)
+fond = pygame.image.load(GAME_MENU)
+fond_noir = pygame.image.load(BLACK_BACKGROUND)
+icone = pygame.image.load(FENETRE_ICON).convert()
 pygame.display.set_icon(icone)
 
 #Chargement des diffirentes images du jeu
-sering = pygame.image.load(seringue).convert()
-element_ether = pygame.image.load(ether).convert_alpha()
-element_tube = pygame.image.load(tube_plastique).convert_alpha()
-element_aiguille = pygame.image.load(aiguille).convert_alpha()
-item_trouver = pygame.image.load(bravo).convert_alpha()
+sering = pygame.image.load(SERINGUE).convert()
+element_ether = pygame.image.load(ETHER).convert_alpha()
+element_tube = pygame.image.load(TUBE).convert_alpha()
+element_aiguille = pygame.image.load(AIGUILLE).convert_alpha()
+item_trouver = pygame.image.load(MANUFACTURED_SYRINGE).convert_alpha()
 item_trouver.set_colorkey(BLANC)
-libre = pygame.image.load(libre).convert()
-non_libre = pygame.image.load(non_libre).convert()
-ob_ether = pygame.image.load(ob_ether).convert()
-ob_seringue = pygame.image.load(ob_seringue).convert()
-ob_tube = pygame.image.load(ob_tube).convert()
+libre = pygame.image.load(WIN_GAME).convert()
+non_libre = pygame.image.load(GAME_OVER).convert()
+ob_ether = pygame.image.load(ETHER_FIND).convert()
+ob_seringue = pygame.image.load(SYRINGE_FOUND).convert()
+ob_tube = pygame.image.load(FIND_TUBE).convert()
 
 
 
@@ -84,10 +84,20 @@ Boucle principale
  
 while  menu:
 
-#Creation du labyrinthe avec affichage
-    
+#Creation 
+    #Creation list of object
+    list_object = ["Ether", "Tube", "Aiguille"]
+    #Declarations des items
+    ether_trouver = False
+    tube_trouver = False
+    aiguille_trouver = False
+    item_3 = False
+    meet_gardien_macGver = False
+
+
+
     niv.afficher(fenetre)
-    mac = Perso(perso_MacGyver, niv)
+    mac = Perso(PERSO_MACGYVER, niv)
     pygame.display.flip()
     
 
@@ -95,16 +105,15 @@ while  menu:
     position_ether,  position_tube, position_aiguille = random.sample(niv.position_elem, 3)
     print(position_aiguille, position_ether, position_tube)
 
-    #Creation du personnage McGyver
-    
+       
 
-    #Blit les items sur le labyrinthe
+    #Blit objects in labyrinthe
     fenetre.blit(element_ether, tuple(position_ether))
     fenetre.blit(element_tube, tuple(position_tube))
     fenetre.blit(element_aiguille, tuple(position_aiguille))
     pygame.display.flip()
-    game_over = False#condition pour une nouvelle partie 
-    continu_game = True 
+    game_over = False#condition pour une nouvelle partie
+    continu_game = True#conditon pour nouvelle partie
 
 
 
@@ -116,9 +125,10 @@ while  menu:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
-                    menu = False 
+                    
                     continu_game = False
                     game_over = True
+                    menu = False 
                     
                 elif event.key == pygame.K_c:
                     continu_game = False

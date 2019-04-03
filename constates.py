@@ -3,46 +3,37 @@
 
 
 """ 
-Fichier ou on stoke les constantes 
+Fichier ou on stoke les constantes  fenetre_icon
 """
-nombre_sprite_cote = 15
-taille_sprite = 30
-cote_fenetre = nombre_sprite_cote * taille_sprite
+NOMBRE_SPRITE_FACE = 15
+TAILLE_SPRITE = 30
+FENETRE_FACE = NOMBRE_SPRITE_FACE * TAILLE_SPRITE
 
-fenetre_resolution = (cote_fenetre, cote_fenetre)
-fenetre_icon = "images/MacGyver.png"
-fenetre_titre = "Aidez MacGyver à s'échapper !"
-fenetre_fond = "images/fond.png"
+FENETRE_RESOLUTION = (FENETRE_FACE, FENETRE_FACE)
+FENETRE_ICON = "images/MacGyver.png"
+FENETRE_TITRE = "Aidez MacGyver à s'échapper !"
+
 
 #load images
-perso_MacGyver = "images/MacGyver1.png"
-aiguille = "images/aiguille1.png"
-ether = "images/ether1.png"
-tube_plastique = "images/tube1.png"
-structures = "images/structures.png"
-decorations = "images/decorations.png"
-equipment = "images/equipment-32x32.png"
-floor_tiles = "images/floor-tiles-20x20.png"
-Gardien = "images/Gardien1.png"
-items = "images/items.png"
-lifebar = "images/lifebar-32x32.png"
-tile_crusader = "images/tile-crusader-logo.png"
-personnages = "images/personnages.png"
-seringue = "images/seringue1.png"
-structures_mur = "images/structures_mur1.png"
-arrival = "images/arrival.png"
-start = "images/start1.png"
-bravo = "images/Injection fabriquee.png"
-libre = "images/libre.png"
-non_libre = "images/non_libre.png"
-ob_seringue = "images/Objet_trouve_seringue.png"
-ob_tube = "images/Objet_trouve_tube.png"
-ob_ether = "images/Objet_trouve_ether.png"
-decorations4 = "images/decorations4.png"
-menu = "images/menu.png"
-fond_noir ="images/fond_noir.png"
+PERSO_MACGYVER = "images/MacGyver1.png"
+AIGUILLE = "images/aiguille1.png"
+ETHER = "images/ether1.png"
+TUBE = "images/tube1.png"
+PRISON_GUARD = "images/Gardien1.png"
+SERINGUE = "images/seringue1.png"
+STRUCT_WALL = "images/structures_mur1.png"
+EXIT_DOOR = "images/arrival.png"
+PRISON = "images/start1.png"
+MANUFACTURED_SYRINGE = "images/Injection fabriquee.png"
+WIN_GAME = "images/libre.png"
+GAME_OVER = "images/non_libre.png"
+SYRINGE_FOUND = "images/Objet_trouve_seringue.png"
+FIND_TUBE = "images/Objet_trouve_tube.png"
+ETHER_FIND = "images/Objet_trouve_ether.png"
+DOCRATION = "images/decorations4.png"
+GAME_MENU = "images/menu.png"
+BLACK_BACKGROUND  ="images/fond_noir.png"
 
 
-#Liste des items
-item_trouver = "images/item_trouver.png"
+
 

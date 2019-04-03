@@ -51,11 +51,11 @@ class Niveau:
 		
 		
 		#Chargement des images (seule celle d'arrivée contient de la transparence)
-		mur = pygame.image.load(structures_mur).convert_alpha()
-		depart = pygame.image.load(start).convert_alpha()
-		arrivee = pygame.image.load(arrival).convert_alpha()
-		gardien = pygame.image.load(Gardien).convert_alpha()
-		my_decorations4 = pygame.image.load(decorations4).convert()
+		mur = pygame.image.load(STRUCT_WALL).convert_alpha()
+		depart = pygame.image.load(PRISON).convert_alpha()
+		arrivee = pygame.image.load(EXIT_DOOR).convert_alpha()
+		gardien = pygame.image.load(PRISON_GUARD).convert_alpha()
+		my_decorations4 = pygame.image.load(DOCRATION).convert()
 		
 		
 		#On parcourt la liste du niveau
@@ -65,8 +65,8 @@ class Niveau:
 			num_case = 0
 			for sprite in ligne:
 				#On calcule la position réelle en pixels
-				x = num_case * taille_sprite
-				y = num_ligne * taille_sprite
+				x = num_case * TAILLE_SPRITE
+				y = num_ligne * TAILLE_SPRITE
 				if sprite == 'm':		   #m = Mur
 					fenetre.blit(mur, (x, y))
 				elif sprite == 'x':
@@ -75,7 +75,7 @@ class Niveau:
 					fenetre.blit(depart, (x, y))
 				elif sprite == 'a':		   #a = Arrivée
 					fenetre.blit(arrivee, (x, y))
-					fenetre.blit(gardien, (x-taille_sprite, y))
+					fenetre.blit(gardien, (x-TAILLE_SPRITE, y))
 				elif sprite == 'p':		   #p = position pour items 
 					self.position_elem.append((x, y))
 					
@@ -85,65 +85,7 @@ class Niveau:
 		
     
    
-class Perso:
-	"""Classe permettant de créer un personnage"""
-	def __init__(self, image, niveau):
-		#Sprites du personnage
-		#supprime 
-		self.personnage = pygame.image.load(image).convert_alpha()
-		
-		#Position du personnage en cases et en pixels
-		self.case_x = 0
-		self.case_y = 0
-		self.x = 0
-		self.y = 0
-		#Direction par défaut
-		#supprime 
-		self.direction = self.personnage
-		#Niveau dans lequel le personnage se trouve 
-		self.niveau = niveau
-	
-	
-	def deplacer(self, direction):
-		"""Methode permettant de déplacer le personnage"""
-		
-		#Déplacement vers la personnage
-		if direction == 'droite':
-			#Pour ne pas dépasser l'écran
-			if self.case_x < (nombre_sprite_cote - 1):
-				#On vérifie que la case de destination n'est pas un mur
-				if self.niveau.structure[self.case_y][self.case_x+1] != 'm' and self.niveau.structure[self.case_y][self.case_x+1] != 'x':
-					#Déplacement d'une case
-					self.case_x += 1
-					#Calcul de la position "réelle" en pixel
-					self.x = self.case_x * taille_sprite
-			self.direction = self.personnage
-			#Image dans la bonne direction
-			
-		
-		#Déplacement vers la gauche
-		if direction == 'gauche':
-			if self.case_x > 0:
-				if self.niveau.structure[self.case_y][self.case_x-1] != 'm' and self.niveau.structure[self.case_y][self.case_x-1] != 'x':
-					self.case_x -= 1
-					self.x = self.case_x * taille_sprite
-			self.direction = self.personnage
-		
-		#Déplacement vers le haut
-		if direction == 'haut':
-			if self.case_y > 0:
-				if self.niveau.structure[self.case_y-1][self.case_x] != 'm' and self.niveau.structure[self.case_y-1][self.case_x] != 'x':
-					self.case_y -= 1
-					self.y = self.case_y * taille_sprite
-			self.direction = self.personnage
-		
-		#Déplacement vers le bas
-		if direction == 'bas':
-			if self.case_y < (nombre_sprite_cote - 1):
-				if self.niveau.structure[self.case_y+1][self.case_x] != 'm' and self.niveau.structure[self.case_y+1][self.case_x] != 'x':
-					self.case_y += 1
-					self.y = self.case_y * taille_sprite
-			self.direction = self.personnage
+
 
 	
 	
