@@ -31,7 +31,7 @@ SYRINGE_FOUND = "images/Objet_trouve_seringue.png"
 FIND_TUBE = "images/Objet_trouve_tube.png"
 ETHER_FIND = "images/Objet_trouve_ether.png"
 DOCRATION = "images/decorations4.png"
-GAME_MENU = "images/menu.png"
+GAME_MENU = "images/GAME_MENU.png"
 BLACK_BACKGROUND  ="images/fond_noir.png"
 
 
