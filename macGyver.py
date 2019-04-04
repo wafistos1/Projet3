@@ -7,19 +7,19 @@ Jeu dans lequel on doit deplac........
 
 """
 #
-# import some files and modules 
+# import files and modules 
 import pygame 
 import pygame.locals
 import random
-from  classes import *
+from  niveau import *
 from  constates import *
 from perso import *
 from itertools import zip_longest 
 
-#Initialisation du jeu
+#Initialisation Game
 pygame.init()
 
-#Couleur
+#Color
 BLANC = (255, 255, 255)
 
 #font
