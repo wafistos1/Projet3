@@ -1,7 +1,7 @@
-d0000xxxpxp0xxx
+d00xxxxxpxp0xxx
 0m00000m0mm0m0p
 00mm0m000m0000x
-x000mmmm000mmmx
+x0000mmm000mmmx
 000m00000mmm00x
 xm0mmmm0mm000mx
 000mmm00000mmmx
@@ -11,5 +11,5 @@ xmm0000mm0mmmmx
 xmm0mm0m00mm0px
 x000m00m0mm00mx
 p0mm00m00000mmx
-xmmm00mm0mm0mmx
+xmmm0mmm0mm0mmx
 xp000xxx00x000a

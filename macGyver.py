@@ -35,7 +35,7 @@ fond_noir = pygame.image.load(BLACK_BACKGROUND)
 icone = pygame.image.load(FENETRE_ICON).convert()
 pygame.display.set_icon(icone)
 
-#Chargement des diffirentes images du jeu
+#Load images of game
 sering = pygame.image.load(SERINGUE).convert()
 element_ether = pygame.image.load(ETHER).convert_alpha()
 element_tube = pygame.image.load(TUBE).convert_alpha()
@@ -53,7 +53,7 @@ ob_tube = pygame.image.load(FIND_TUBE).convert()
 
 
 
-#Declarations des items
+#Declarations of objects
 ether_trouver = False
 tube_trouver = False
 aiguille_trouver = False
@@ -62,11 +62,10 @@ meet_gardien_macGver = False
 
 
 
-#Deplacement en laisant la touche enfoncee 
+#code for moving the character while holding down the key  
 pygame.key.set_repeat(400, 30)
 
-
-#Recuperation d'une liste pour les positions des items
+#Retrieving a list for object positions
 niv = Niveau("niveau.txt")
 niv.generer()
 
@@ -135,7 +134,7 @@ while  menu:
                     
     
      
-    #Boucle principale du jeu 
+    #main loop of game 
     while not game_over:
         pygame.time.Clock().tick(30)# Framerate 30
         
@@ -159,11 +158,11 @@ while  menu:
                     mac.deplacer('bas')
                 
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=   
-        #Affichage (raffrichissement)
+        #character control
         fenetre.blit(fond_noir, (0, 0))
         niv.afficher(fenetre)
         
-        #Logique de l'affichage des items
+        #Logic of the display of objects
         if position_ether != (mac.x, mac.y) and ether_trouver == False:
             fenetre.blit(element_ether, tuple(position_ether))
         else:
@@ -203,12 +202,10 @@ while  menu:
         if mac.x == 360 and mac.y == 420 and meet_gardien_macGver == False:
             meet_gardien_macGver = True
             if item_3 == True:
-                #fenetre.blit(discution)
                 affichage(fenetre, libre)
                 
                 
             else:
-                #fenetre de vous avez perdu
                 affichage(fenetre, non_libre)
                 
 
@@ -219,6 +216,6 @@ while  menu:
             #menu = False
             
         fenetre.blit(mac.personnage, (mac.x, mac.y))
-        #Condition de collision
+        #Condition of collision
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         pygame.display.flip()

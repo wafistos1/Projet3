@@ -5,7 +5,7 @@
 Classes
 
 """
-"""Classes du jeu de Labyrinthe Donkey Kong"""
+"""Classes level de Labyrinthe """
 
 import pygame
 from pygame.locals import * 
@@ -13,7 +13,7 @@ from constates import *
 import random 
 
 class Niveau:
-	"""Classe permettant de créer un niveau"""
+	"""Class to create a level"""
 	def __init__(self, fichier):
 		self.fichier = fichier
 		self.structure = []
@@ -21,8 +21,8 @@ class Niveau:
 	
 	
 	def generer(self):
-		"""Méthode permettant de générer le niveau en fonction du fichier.
-		On crée une liste générale, contenant une liste par ligne à afficher"""	
+		"""Method to generate the level.
+		"""	
 		#On ouvre le fichier
 		with open(self.fichier, "r") as fichier:
 			
@@ -45,12 +45,12 @@ class Niveau:
 
 
 	def afficher(self, fenetre):
-		"""Méthode permettant d'afficher le niveau en fonction 
-		de la liste de structure renvoyée par generer()"""
+		"""Method for displaying the level 
+		"""
 		
 		
 		
-		#Chargement des images (seule celle d'arrivée contient de la transparence)
+		#Loading images 
 		mur = pygame.image.load(STRUCT_WALL).convert_alpha()
 		depart = pygame.image.load(PRISON).convert_alpha()
 		arrivee = pygame.image.load(EXIT_DOOR).convert_alpha()
@@ -58,13 +58,13 @@ class Niveau:
 		my_decorations4 = pygame.image.load(DOCRATION).convert()
 		
 		
-		#On parcourt la liste du niveau
+		#We go through the list of the level
 		num_ligne = 0
 		for ligne in self.structure:
 			#On parcourt les listes de lignes
 			num_case = 0
 			for sprite in ligne:
-				#On calcule la position réelle en pixels
+				# calculate the actual position in pixels
 				x = num_case * TAILLE_SPRITE
 				y = num_ligne * TAILLE_SPRITE
 				if sprite == 'm':		   #m = Mur
@@ -76,22 +76,21 @@ class Niveau:
 				elif sprite == 'a':		   #a = Arrivée
 					fenetre.blit(arrivee, (x, y))
 					fenetre.blit(gardien, (x-TAILLE_SPRITE, y))
-				elif sprite == 'p':		   #p = position pour items 
+				elif sprite == 'p':		   #p = position for items 
 					self.position_elem.append((x, y))
 					
 				num_case += 1
 			num_ligne += 1
 		
-		
-    
-   
+#===================================================================================================		
+#Fonctions   
+#===================================================================================================		
 
 
-	
 	
 def affichage(fenetre, image, tmp=2000, position=(70, 70)):
 	"""
-	Fonction qui affiche en premier plan des images passer en argument
+	Function that displays images as arguments
 	"""
 	fenetre.blit(image, position)
 	pygame.display.flip()
@@ -109,6 +108,6 @@ def animation(fenetre, texte, my_font, text_color=(0, 7, 255), backgroud_color=(
 		my_surface_font = my_font.render(lettre, False, text_color, backgroud_color)
 		fenetre.blit(my_surface_font, (100, 100))
 		pygame.display.flip()
-		#ajouter une surface pour netoyer l'ecran ....
+		
 	pygame.time.delay(1000)
 		
