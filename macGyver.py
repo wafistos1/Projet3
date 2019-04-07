@@ -6,7 +6,7 @@ Jeu : Aidez MacGyver à s'échapper !
 Jeu dans lequel on doit deplac........
 
 """
-#
+
 # import files and modules
 import pygame
 import pygame.locals
@@ -14,6 +14,7 @@ import random
 from  niveau import *
 from  constates import *
 from perso import *
+
 
 #Initialisation Game
 pygame.init()
@@ -76,7 +77,7 @@ while  menu:
 #Creation
     #Creation list of object
     list_object = ["Ether", "Tube", "Aiguille"]
-    #Declarations des items
+    #Object_declarations 
     ether_trouver = False
     tube_trouver = False
     aiguille_trouver = False
@@ -97,6 +98,7 @@ while  menu:
     FENETRE.blit(ELEMENT_ETHER, tuple(position_ether))
     FENETRE.blit(ELEMENT_TUBE, tuple(position_tube))
     FENETRE.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
+
     pygame.display.flip()
     game_over = False#condition pour une nouvelle partie
     continu_game = True#conditon pour nouvelle partie

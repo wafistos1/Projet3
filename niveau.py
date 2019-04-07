@@ -1,31 +1,31 @@
 #!/usr/bin/python3
 # -*- coding: UTf8 -*-
-
-"""
-Classes
-
-"""
-"""Classes level de Labyrinthe """
-
 import pygame
-from pygame.locals import * 
+from pygame.locals import *
 from constates import *
-import random 
+
+
+"""
+Classes level for Labyrinthe
+"""
+
+
 
 class Niveau:
-	"""Class to create a level"""
+	"""Class to create a level
+	"""
 	def __init__(self, fichier):
 		self.fichier = fichier
 		self.structure = []
 		self.position_elem = []
-	
-	
+
+
 	def generer(self):
 		"""Method to generate the level.
-		"""	
+		"""
 		#On ouvre le fichier
 		with open(self.fichier, "r") as fichier:
-			
+
 			#On parcourt les lignes du fichier
 			for ligne in fichier:
 				ligne_niveau = []
@@ -38,26 +38,19 @@ class Niveau:
 				#On ajoute la ligne à la liste du niveau
 				self.structure.append(ligne_niveau)
 			#On sauvegarde cette structure
-			
-
-
-	
 
 
 	def afficher(self, fenetre):
-		"""Method for displaying the level 
+		"""Method for displaying the level
 		"""
-		
-		
-		
-		#Loading images 
+
+		#Loading images
 		mur = pygame.image.load(STRUCT_WALL).convert_alpha()
 		depart = pygame.image.load(PRISON).convert_alpha()
 		arrivee = pygame.image.load(EXIT_DOOR).convert_alpha()
 		gardien = pygame.image.load(PRISON_GUARD).convert_alpha()
 		my_decorations4 = pygame.image.load(DOCRATION).convert()
-		
-		
+
 		#We go through the list of the level
 		num_ligne = 0
 		for ligne in self.structure:
@@ -76,19 +69,17 @@ class Niveau:
 				elif sprite == 'a':		   #a = Arrivée
 					fenetre.blit(arrivee, (x, y))
 					fenetre.blit(gardien, (x-TAILLE_SPRITE, y))
-				elif sprite == 'p':		   #p = position for items 
+				elif sprite == 'p':		   #p = position for items
 					self.position_elem.append((x, y))
-					
+
 				num_case += 1
 			num_ligne += 1
-		
-#===================================================================================================		
-#Fonctions   
-#===================================================================================================		
 
+#===================================================================================================
+#Fonctions
+#===================================================================================================
 
-	
-def affichage(fenetre, image, tmp=2000, position=(70, 70)):
+def affichage(fenetre, image, tmp=4000, position=(70, 70)):
 	"""
 	Function that displays images as arguments
 	"""
@@ -97,17 +88,16 @@ def affichage(fenetre, image, tmp=2000, position=(70, 70)):
 	pygame.time.delay(tmp)
 
 
-def animation(fenetre, texte, my_font, text_color=(0, 7, 255), backgroud_color=(255, 255, 255)):
+def animation(fenetre, texte, my_font, text_color=(0, 7, 255),
+		 backgroud_color=(255, 255, 255)):
 	"""Fonction animated text
 	"""
 	lettre = ""
 	for lettre1 in texte:
 		pygame.time.Clock().tick(8)
-		
 		lettre += lettre1
 		my_surface_font = my_font.render(lettre, False, text_color, backgroud_color)
 		fenetre.blit(my_surface_font, (100, 100))
 		pygame.display.flip()
-		
+
 	pygame.time.delay(1000)
-		

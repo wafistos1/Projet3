@@ -2,8 +2,8 @@
 # -*- coding: UTf8 -*-
 
 
-""" 
-Fichier ou on stoke les constantes  fenetre_icon
+"""
+Fichier ou on stoke les constantes
 """
 NOMBRE_SPRITE_FACE = 15
 TAILLE_SPRITE = 30
@@ -32,8 +32,4 @@ FIND_TUBE = "images/Objet_trouve_tube.png"
 ETHER_FIND = "images/Objet_trouve_ether.png"
 DOCRATION = "images/decorations4.png"
 GAME_MENU = "images/GAME_MENU.png"
-BLACK_BACKGROUND  ="images/fond_noir.png"
-
-
-
-
+BLACK_BACKGROUND = "images/fond_noir.png"
