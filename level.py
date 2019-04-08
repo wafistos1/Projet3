@@ -24,21 +24,23 @@ class Niveau:
 	def generer(self):
 		"""Method to generate the level.
 		"""
-		#On ouvre le fichier
+		#Open files of level
 		with open(self.fichier, "r") as fichier:
 
-			#On parcourt les lignes du fichier
+			#Run line by line
 			for ligne in fichier:
+				
+				#Stocke a single line of our level file 
 				ligne_niveau = []
-				#On parcourt les sprites (lettres) contenus dans le fichier
+				#Run letters
 				for sprite in ligne:
-					#On ignore les "\n" de fin de ligne
+					#has made a line break and we ignore the \n
 					if sprite != '\n':
-						#On ajoute le sprite à la liste de la ligne
+						#Add sprite to the list
 						ligne_niveau.append(sprite)
-				#On ajoute la ligne à la liste du niveau
+				#Add the stock line to our list 
 				self.structure.append(ligne_niveau)
-			#On sauvegarde cette structure
+			#Backup our structure
 
 
 	def afficher(self, fenetre):
@@ -65,12 +67,12 @@ class Niveau:
 					fenetre.blit(mur, (x, y))
 				elif sprite == 'x':
 					fenetre.blit(my_decorations4, (x, y))
-				elif sprite == 'd':		   #d = Départ
+				elif sprite == 'd':		   #d = Start
 					fenetre.blit(depart, (x, y))
-				elif sprite == 'a':		   #a = Arrivée
+				elif sprite == 'a':		   #a = Arrival
 					fenetre.blit(arrivee, (x, y))
 					fenetre.blit(gardien, (x-TAILLE_SPRITE, y))
-				elif sprite == 'p':		   #p = position for items
+				elif sprite == 'p':		   #p = position for our objects
 					self.position_elem.append((x, y))
 
 				num_case += 1

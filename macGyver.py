@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-#coding:UTF-8
+#coding: utf-8
+
 
 """
 Jeu : Aidez MacGyver à s'échapper !
@@ -11,8 +12,8 @@ Jeu dans lequel on doit deplac........
 import pygame
 import pygame.locals
 import random
-from  niveau import *
-from  constates import *
+from  level import *
+from  constantes import *
 from perso import *
 
 
@@ -23,7 +24,7 @@ pygame.init()
 BLANC = (255, 255, 255)
 
 #font
-MY_FONT = pygame.font.SysFont("ubuntu", 40)
+MY_FONT = pygame.font.SysFont("ubuntu", 50)
 
 
 
@@ -100,8 +101,8 @@ while  menu:
     FENETRE.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
 
     pygame.display.flip()
-    game_over = False#condition pour une nouvelle partie
-    continu_game = True#conditon pour nouvelle partie
+    game_over = False #condition pour une nouvelle partie
+    continu_game = True #conditon pour nouvelle partie
 
 
 
@@ -154,20 +155,20 @@ while  menu:
             FENETRE.blit(ELEMENT_ETHER, tuple(position_ether))
         else:
             if not ether_trouver:
-                animation(FENETRE, "Ether find", MY_FONT, )
+                animation(FENETRE, "Ether found", MY_FONT, )
                 list_object.remove("Ether")
                 if list_object:
-                    animation(FENETRE, f"Il reste {len(list_object)} Objets !!", MY_FONT)
+                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
                 ether_trouver = True
 
         if position_tube != (mac.x, mac.y) and not tube_trouver:
             FENETRE.blit(ELEMENT_TUBE, tuple(position_tube))
         else:
             if not tube_trouver:
-                animation(FENETRE, "Tube find", MY_FONT, )
+                animation(FENETRE, "Tube found", MY_FONT, )
                 list_object.remove("Tube")
                 if list_object:
-                    animation(FENETRE, f"Il reste {len(list_object)} Objets !!", MY_FONT)
+                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
                 tube_trouver = True
 
         if position_aiguille != (mac.x, mac.y) and not aiguille_trouver:
@@ -175,10 +176,10 @@ while  menu:
         else:
             if not aiguille_trouver:
 
-                animation(FENETRE, f"Aiguille find", MY_FONT, )
+                animation(FENETRE, f"Aiguille found", MY_FONT, )
                 list_object.remove("Aiguille")
                 if list_object:
-                    animation(FENETRE, f"Il reste {len(list_object)} Objets !!", MY_FONT)
+                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
                 aiguille_trouver = True
         # Verifications si tous les items on ete trouve
         if tube_trouver and ether_trouver and aiguille_trouver  and not item_3:
@@ -197,7 +198,7 @@ while  menu:
 
         if niv.structure[mac.case_y][mac.case_x] == 'a':
             game_over = True
-            niv.position_elem = [] #Initialisation the list positions of Objects at 0
+            niv.position_elem = [] #Initialisation the list of positions of Objects at 0
             #menu = False
 
         FENETRE.blit(mac.personnage, (mac.x, mac.y))
