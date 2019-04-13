@@ -27,11 +27,11 @@ BLANC = (255, 255, 255)
 MY_FONT = pygame.font.SysFont("ubuntu", 50)
 
 # Diffirentes etapes de la creations du jeu
-pygame.display.set_caption(FENETRE_TITRE)
-FENETRE = pygame.display.set_mode(FENETRE_RESOLUTION)
+pygame.display.set_caption(WINDOW_TITRE)
+WINDOW = pygame.display.set_mode(WINDOW_RESOLUTION)
 WINDOW_BACKGROUND = pygame.image.load(GAME_MENU)
 BLACK_BACKGROUND = pygame.image.load(BLACK_BACKGROUND)
-ICON = pygame.image.load(FENETRE_ICON).convert()
+ICON = pygame.image.load(WINDOW_ICON).convert()
 pygame.display.set_icon(ICON)
 
 # Load images of game
@@ -43,7 +43,7 @@ WINNER = pygame.image.load(WIN_GAME).convert()
 LOOSER = pygame.image.load(GAME_OVER).convert()
 
 # Declarations of objects
-ether_trouver = False
+ether_found = False
 tube_trouver = False
 aiguille_trouver = False
 item_3 = False
@@ -53,8 +53,8 @@ meet_gardien_macGver = False
 pygame.key.set_repeat(400, 30)
 
 # Retrieving a list for object positions
-niv = Niveau("niveau.txt")
-niv.generer()
+level = Level("niveau.txt")
+level.generer()
 
 # Condition for menu and game
 menu = True
@@ -72,24 +72,24 @@ while menu:
     list_object = ["Ether", "Tube", "Aiguille"]
 
     # Object_declarations
-    ether_trouver = False
-    tube_trouver = False
-    aiguille_trouver = False
+    ether_found = False
+    tube_found = False
+    aiguille_found = False
     item_3 = False
     meet_gardien_macGver = False
 
     # Create level
-    niv.afficher(FENETRE)
+    level.display(WINDOW)
 
     # Create a character
-    mac = Perso(PERSO_MACGYVER, niv)
+    mac = Perso(PERSO_MACGYVER, level)
     pygame.display.flip()
 
     # Blit objects in labyrinthe
-    position_ether, position_tube, position_aiguille = random.sample(niv.position_elem, 3)
-    FENETRE.blit(ELEMENT_ETHER, tuple(position_ether))
-    FENETRE.blit(ELEMENT_TUBE, tuple(position_tube))
-    FENETRE.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
+    position_ether, position_tube, position_aiguille = random.sample(level.position_elem, 3)
+    WINDOW.blit(ELEMENT_ETHER, tuple(position_ether))
+    WINDOW.blit(ELEMENT_TUBE, tuple(position_tube))
+    WINDOW.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
 
     pygame.display.flip()
 
@@ -98,7 +98,7 @@ while menu:
 
     while continu_game:
         pygame.time.Clock().tick(10)
-        FENETRE.blit(WINDOW_BACKGROUND, (65, 90))
+        WINDOW.blit(WINDOW_BACKGROUND, (65, 90))
         pygame.display.flip()
 
         for event in pygame.event.get():
@@ -126,70 +126,70 @@ while menu:
                 if event.key == pygame.K_ESCAPE:
                     game_over = True
                 elif event.key == pygame.K_RIGHT:
-                    mac.deplacer('droite')
+                    mac.move('droite')
                 elif event.key == pygame.K_LEFT:
-                    mac.deplacer('gauche')
+                    mac.move('gauche')
                 elif event.key == pygame.K_UP:
-                    mac.deplacer('haut')
+                    mac.move('haut')
                 elif event.key == pygame.K_DOWN:
-                    mac.deplacer('bas')
+                    mac.move('bas')
 
     #  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
         # Character control
-        FENETRE.blit(BLACK_BACKGROUND, (0, 0))
-        niv.afficher(FENETRE)
+        WINDOW.blit(BLACK_BACKGROUND, (0, 0))
+        level.display(WINDOW)
 
         # Logic of the display of objects
-        if position_ether != (mac.x, mac.y) and not ether_trouver:
-            FENETRE.blit(ELEMENT_ETHER, tuple(position_ether))
+        if position_ether != (mac.x, mac.y) and not ether_found:
+            WINDOW.blit(ELEMENT_ETHER, tuple(position_ether))
         else:
-            if not ether_trouver:
-                animation(FENETRE, "Éther trouvé", MY_FONT, )
+            if not ether_found:
+                animation(WINDOW, "Éther trouvé", MY_FONT, )
                 list_object.remove("Ether")
                 if list_object:
-                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
-                ether_trouver = True
+                    animation(WINDOW, f" {len(list_object)} Objets restant", MY_FONT)
+                ether_found = True
 
-        if position_tube != (mac.x, mac.y) and not tube_trouver:
-            FENETRE.blit(ELEMENT_TUBE, tuple(position_tube))
+        if position_tube != (mac.x, mac.y) and not tube_found:
+            WINDOW.blit(ELEMENT_TUBE, tuple(position_tube))
         else:
-            if not tube_trouver:
-                animation(FENETRE, "Tube trouvé", MY_FONT, )
+            if not tube_found:
+                animation(WINDOW, "Tube trouvé", MY_FONT, )
                 list_object.remove("Tube")
                 if list_object:
-                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
-                tube_trouver = True
+                    animation(WINDOW, f" {len(list_object)} Objets restant", MY_FONT)
+                tube_found = True
 
-        if position_aiguille != (mac.x, mac.y) and not aiguille_trouver:
-            FENETRE.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
+        if position_aiguille != (mac.x, mac.y) and not aiguille_found:
+            WINDOW.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
         else:
-            if not aiguille_trouver:
+            if not aiguille_found:
 
-                animation(FENETRE, f"Aiguille trouvée", MY_FONT, )
+                animation(WINDOW, f"Aiguille trouvée", MY_FONT, )
                 list_object.remove("Aiguille")
                 if list_object:
-                    animation(FENETRE, f" {len(list_object)} Objets restant", MY_FONT)
-                aiguille_trouver = True
+                    animation(WINDOW, f" {len(list_object)} Objets restant", MY_FONT)
+                aiguille_found = True
 
         # Verifications si tous les objets on ete trouves
-        if tube_trouver and ether_trouver and aiguille_trouver and not item_3:
-            affichage(FENETRE, ITEM_trouvé)
+        if tube_found and ether_found and aiguille_found and not item_3:
+            posting(WINDOW, ITEM_trouvé)
             item_3 = True
 
         # Meet prison guard
         if mac.x == 360 and mac.y == 420 and not meet_gardien_macGver:
             meet_gardien_macGver = True
             if item_3:
-                affichage(FENETRE, WINNER)
+                posting(WINDOW, WINNER)
 
             else:
-                affichage(FENETRE, LOOSER)
+                posting(WINDOW, LOOSER)
 
-        if niv.structure[mac.case_y][mac.case_x] == 'a':
+        if level.structure[mac.case_y][mac.case_x] == 'a':
             game_over = True
-            niv.position_elem = []  # Initialisation the list of positions of Objects at 0
+            level.position_elem = []  # Initialisation the list of positions of Objects at 0
 
-        FENETRE.blit(mac.personnage, (mac.x, mac.y))
+        WINDOW.blit(mac.personnage, (mac.x, mac.y))
         # Condition of collision
     #  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         pygame.display.flip()

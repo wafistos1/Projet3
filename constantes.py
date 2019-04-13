@@ -7,11 +7,11 @@ Fichier ou on stoke les constantes
 """
 NOMBRE_SPRITE_FACE = 15
 TAILLE_SPRITE = 30
-FENETRE_FACE = NOMBRE_SPRITE_FACE * TAILLE_SPRITE
+WINDOW_FACE = NOMBRE_SPRITE_FACE * TAILLE_SPRITE
 
-FENETRE_RESOLUTION = (FENETRE_FACE, FENETRE_FACE)
-FENETRE_ICON = "images/MacGyver.png"
-FENETRE_TITRE = "Aidez MacGyver à s'échapper !"
+WINDOW_RESOLUTION = (WINDOW_FACE, WINDOW_FACE)
+WINDOW_ICON = "images/MacGyver.png"
+WINDOW_TITRE = "Aidez MacGyver à s'échapper !"
 
 
 #load images

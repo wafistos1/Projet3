@@ -25,7 +25,7 @@ class Perso:
 		self.niveau = niveau
 	
 	
-	def deplacer(self, direction):
+	def move(self, direction):
 		"""method to move the character 
 		"""
 		

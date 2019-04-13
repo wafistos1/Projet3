@@ -6,7 +6,7 @@ from pygame.locals import *
 from constantes import *
 
 
-class Niveau:
+class Level:
 	"""Class to create a level
 	"""
 	def __init__(self, fichier):
@@ -35,7 +35,7 @@ class Niveau:
 				self.structure.append(ligne_niveau)
 			# Backup our structure
 
-	def afficher(self, fenetre):
+	def display(self, fenetre):
 		"""Method for displaying the level
 		"""
 		# Loading images
@@ -73,7 +73,7 @@ class Niveau:
 #  ===================================================================================================
 # Fonctions
 #  ===================================================================================================
-def affichage(fenetre, image, tmp=4000, position=(65, 90)):
+def posting(fenetre, image, tmp=4000, position=(65, 90)):
 	"""
 	Function that displays images as arguments"""
 	fenetre.blit(image, position)
