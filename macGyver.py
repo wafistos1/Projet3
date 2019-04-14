@@ -93,12 +93,13 @@ while menu:
 
     pygame.display.flip()
 
-    game_over = False  # condition pour une nouvelle partie
-    continu_game = True  # conditon pour nouvelle partie
+    game_over = False  
+    continu_game = True  
 
     while continu_game:
         pygame.time.Clock().tick(10)
         WINDOW.blit(WINDOW_BACKGROUND, (65, 90))
+
         pygame.display.flip()
 
         for event in pygame.event.get():

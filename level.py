@@ -39,10 +39,10 @@ class Level:
 		"""Method for displaying the level
 		"""
 		# Loading images
-		mur = pygame.image.load(STRUCT_WALL).convert_alpha()
-		depart = pygame.image.load(PRISON).convert_alpha()
-		arrivee = pygame.image.load(EXIT_DOOR).convert_alpha()
-		gardien = pygame.image.load(PRISON_GUARD).convert_alpha()
+		wall = pygame.image.load(STRUCT_WALL).convert_alpha()
+		start = pygame.image.load(PRISON).convert_alpha()
+		arrival = pygame.image.load(EXIT_DOOR).convert_alpha()
+		guardian = pygame.image.load(PRISON_GUARD).convert_alpha()
 		my_decorations4 = pygame.image.load(DOCRATION).convert()
 
 		# We go through the list of the level
@@ -54,15 +54,15 @@ class Level:
 				# Calculate the actual position in pixels
 				x = num_case * TAILLE_SPRITE
 				y = num_ligne * TAILLE_SPRITE
-				if sprite == 'm':  # m = Mur
-					fenetre.blit(mur, (x, y))
+				if sprite == 'm':  # m = wall
+					fenetre.blit(wall, (x, y))
 				elif sprite == 'x':
 					fenetre.blit(my_decorations4, (x, y))
 				elif sprite == 'd':  # d = Start
-					fenetre.blit(depart, (x, y))
+					fenetre.blit(start, (x, y))
 				elif sprite == 'a':  #  a = Arrival
-					fenetre.blit(arrivee, (x, y))
-					fenetre.blit(gardien, (x-TAILLE_SPRITE, y))
+					fenetre.blit(arrival, (x, y))
+					fenetre.blit(guardian, (x-TAILLE_SPRITE, y))
 				elif sprite == 'p':  # p = position for our objects
 					self.position_elem.append((x, y))
 
