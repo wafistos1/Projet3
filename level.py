@@ -45,7 +45,7 @@ class Level:
 		wall = pygame.image.load(STRUCT_WALL).convert_alpha()
 		start = pygame.image.load(PRISON).convert_alpha()
 		arrival = pygame.image.load(EXIT_DOOR).convert_alpha()
-		guardian = pygame.image.load(PRISON_GUARD).convert_alpha()
+		#guardian = pygame.image.load(PRISON_GUARD).convert_alpha()
 		my_decorations4 = pygame.image.load(DOCRATION).convert()
 
 		# We go through the list of the level
@@ -65,7 +65,7 @@ class Level:
 					fenetre.blit(start, (x, y))
 				elif sprite == 'a':  #  a = Arrival
 					fenetre.blit(arrival, (x, y))
-					fenetre.blit(guardian, (x-TAILLE_SPRITE, y))
+					#fenetre.blit(guardian, (x-TAILLE_SPRITE, y))
 				elif sprite == 'p':  # p = position for our objects
 					self.position_elem.append((x, y))
 

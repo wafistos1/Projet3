@@ -8,9 +8,9 @@ Game: Aidez MacGyver à s'échapper !
 """
 
 # import files and modules
+import random
 import pygame
 import pygame.locals
-import random
 from level import *
 from constantes import *
 from perso import *
@@ -89,15 +89,17 @@ while menu:
     WINDOW.blit(ELEMENT_ETHER, tuple(position_ether))
     WINDOW.blit(ELEMENT_TUBE, tuple(position_tube))
     WINDOW.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
-
+    guardian = pygame.image.load(PRISON_GUARD).convert_alpha()
+    WINDOW.blit(guardian, (360, 420))
     pygame.display.flip()
 
-    game_over = False 
+    game_over = False
     continu_game = True
 
     while continu_game:
         pygame.time.Clock().tick(10)
         WINDOW.blit(WINDOW_BACKGROUND, (65, 90))
+        
 
         pygame.display.flip()
 
@@ -113,8 +115,9 @@ while menu:
 
     # Main loop of game
     while not game_over:
-        pygame.time.Clock().tick(30)  # Framerate 30
-
+        pygame.time.Clock().tick(10)  # Framerate 30
+        
+        pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 menu = False
@@ -184,12 +187,16 @@ while menu:
 
             else:
                 posting(WINDOW, LOOSER)
+                game_over = True
+                level.position_elem = []
 
         if level.structure[mac.case_y][mac.case_x] == 'a':
             game_over = True
-            level.position_elem = []  # Initialisation the list of positions of Objects at 0
+            level.position_elem = []
 
         WINDOW.blit(mac.personnage, (mac.x, mac.y))
-        # Condition of collision
-    #  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        if not meet_gardien_macGver:
+            WINDOW.blit(guardian, (360, 420))
+        
+    #  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         pygame.display.flip()
