@@ -1,3 +1,6 @@
+""" module responsible for creating the labyrinth level
+"""
+
 #!/usr/bin/python3
 # coding: utf-8
 
@@ -73,6 +76,7 @@ class Level:
 #  ===================================================================================================
 # Fonctions
 #  ===================================================================================================
+
 def posting(fenetre, image, tmp=4000, position=(65, 90)):
 	"""
 	Function that displays images as arguments"""
@@ -81,7 +85,7 @@ def posting(fenetre, image, tmp=4000, position=(65, 90)):
 	pygame.time.delay(tmp)
 
 
-def animation(fenetre, texte, my_font, text_color=(0, 7, 255),
+def animation(fenetre, texte, my_font, text_color=(0, 7, 255),\
 	backgroud_color=(255, 255, 255)):
 	"""Fonction animated text"""
 	lettre = ""
@@ -91,5 +95,4 @@ def animation(fenetre, texte, my_font, text_color=(0, 7, 255),
 		my_surface_font = my_font.render(lettre, False, text_color, backgroud_color)
 		fenetre.blit(my_surface_font, (100, 100))
 		pygame.display.flip()
-
 	pygame.time.delay(1000)

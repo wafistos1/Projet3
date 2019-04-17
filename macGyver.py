@@ -3,8 +3,7 @@
 
 
 """
-Jeu : Aidez MacGyver à s'échapper !
-Jeu dans lequel on doit deplac........
+Game: Aidez MacGyver à s'échapper !
 
 """
 
@@ -93,8 +92,8 @@ while menu:
 
     pygame.display.flip()
 
-    game_over = False  
-    continu_game = True  
+    game_over = False 
+    continu_game = True
 
     while continu_game:
         pygame.time.Clock().tick(10)

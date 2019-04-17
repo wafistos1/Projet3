@@ -3,7 +3,7 @@
 
 
 """
-Fichier ou on stoke les constantes
+module of constants
 """
 NOMBRE_SPRITE_FACE = 15
 TAILLE_SPRITE = 30
