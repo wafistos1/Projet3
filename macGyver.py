@@ -11,9 +11,9 @@ Game: Aidez MacGyver à s'échapper !
 import random
 import pygame
 import pygame.locals
-from level import *
+from lvl import *
 from constantes import *
-from perso import *
+from person import *
 
 
 # Initialisation Game
@@ -53,7 +53,7 @@ pygame.key.set_repeat(400, 30)
 
 # Retrieving a list for object positions
 level = Level("niveau.txt")
-level.generer()
+level.generate()
 
 # Condition for menu and game
 menu = True
@@ -89,6 +89,7 @@ while menu:
     WINDOW.blit(ELEMENT_ETHER, tuple(position_ether))
     WINDOW.blit(ELEMENT_TUBE, tuple(position_tube))
     WINDOW.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
+    print(level.position_elem)
     guardian = pygame.image.load(PRISON_GUARD).convert_alpha()
     WINDOW.blit(guardian, (360, 420))
     pygame.display.flip()
@@ -99,7 +100,6 @@ while menu:
     while continu_game:
         pygame.time.Clock().tick(10)
         WINDOW.blit(WINDOW_BACKGROUND, (65, 90))
-        
 
         pygame.display.flip()
 
@@ -116,7 +116,6 @@ while menu:
     # Main loop of game
     while not game_over:
         pygame.time.Clock().tick(10)  # Framerate 30
-        
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -124,7 +123,7 @@ while menu:
                 continu_game = False
                 game_over = True
 
-            # Control du personnage
+            # character control
             elif event.type == KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     game_over = True
@@ -143,7 +142,7 @@ while menu:
         level.display(WINDOW)
 
         # Logic of the display of objects
-        if position_ether != (mac.x, mac.y) and not ether_found:
+        if position_ether != (mac.x_pixel, mac.y_pixel) and not ether_found:
             WINDOW.blit(ELEMENT_ETHER, tuple(position_ether))
         else:
             if not ether_found:
@@ -153,7 +152,7 @@ while menu:
                     animation(WINDOW, f" {len(list_object)} Objets restant", MY_FONT)
                 ether_found = True
 
-        if position_tube != (mac.x, mac.y) and not tube_found:
+        if position_tube != (mac.x_pixel, mac.y_pixel) and not tube_found:
             WINDOW.blit(ELEMENT_TUBE, tuple(position_tube))
         else:
             if not tube_found:
@@ -163,7 +162,7 @@ while menu:
                     animation(WINDOW, f" {len(list_object)} Objets restant", MY_FONT)
                 tube_found = True
 
-        if position_aiguille != (mac.x, mac.y) and not aiguille_found:
+        if position_aiguille != (mac.x_pixel, mac.y_pixel) and not aiguille_found:
             WINDOW.blit(ELEMENT_AIGUILLE, tuple(position_aiguille))
         else:
             if not aiguille_found:
@@ -180,7 +179,7 @@ while menu:
             item_3 = True
 
         # Meet prison guard
-        if mac.x == 360 and mac.y == 420 and not meet_gardien_macGver:
+        if mac.x_pixel == 360 and mac.y_pixel == 420 and not meet_gardien_macGver:
             meet_gardien_macGver = True
             if item_3:
                 posting(WINDOW, WINNER)
@@ -190,13 +189,12 @@ while menu:
                 game_over = True
                 level.position_elem = []
 
-        if level.structure[mac.case_y][mac.case_x] == 'a':
+        if level.structure[mac.y_box][mac.x_box] == 'a':
             game_over = True
             level.position_elem = []
 
-        WINDOW.blit(mac.personnage, (mac.x, mac.y))
+        WINDOW.blit(mac.person,  (mac.x_pixel, mac.y_pixel))
         if not meet_gardien_macGver:
-            WINDOW.blit(guardian, (360, 420))
-        
+            WINDOW.blit(guardian, (360, 420)) 
     #  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         pygame.display.flip()
