@@ -1,20 +1,20 @@
-#!/usr/bin/python3
-#coding: utf-8
+# !/usr/bin/python3
+# coding: utf-8
 
 
 """
 module of constants
 """
-NOMBRE_SPRITE_FACE = 15
+NUMBER_SPRITE_FACE = 15
 SIZE_SPRITE = 30
-WINDOW_FACE = NOMBRE_SPRITE_FACE * SIZE_SPRITE
+WINDOW_FACE = NUMBER_SPRITE_FACE * SIZE_SPRITE
 
 WINDOW_RESOLUTION = (WINDOW_FACE, WINDOW_FACE)
 WINDOW_ICON = "images/MacGyver.png"
-WINDOW_TITRE = "Aidez MacGyver à s'échapper !"
+WINDOW_TITLE = "Aidez MacGyver à s'échapper !"
 
 
-#load images
+# load images
 PERSO_MACGYVER = "images/MacGyver1.png"
 AIGUILLE = "images/aiguille1.png"
 ETHER = "images/ether1.png"
