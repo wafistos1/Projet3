@@ -2,7 +2,7 @@
 Pour jouer:
 
 -Installer la Library pygame (pip install pygame)
--Il faut lancer le fichier a partir du fichier macGyver.py
+-Il faut lancer le fichier a partir du fichier macgver.py
 -Pour le deplacement du personnage il faut utiliser les touches du clavier (haut, bas, gauche, droit)
 
 Bon jeu
